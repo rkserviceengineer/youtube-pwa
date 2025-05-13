@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YouTube Wrapper</title>
 
+  <!-- PWA tags -->
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#000000" />
   <link rel="apple-touch-icon" href="icon.png" />
@@ -15,41 +16,20 @@
       padding: 0;
       height: 100%;
     }
-    #player {
+    iframe {
+      border: none;
       width: 100%;
       height: 100%;
     }
   </style>
 </head>
 <body>
-  <div id="player"></div>
-
-  <script>
-    // Load the IFrame Player API code asynchronously
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    // Replace the 'player' div with a YouTube player
-    var player;
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-        height: '390',
-        width: '640',
-        videoId: 'M7lc1UVf-VE', // Change this to your desired video ID
-        events: {
-          'onStateChange': onPlayerStateChange
-        }
-      });
-    }
-
-    // Function to handle video state changes
-    function onPlayerStateChange(event) {
-      if (event.data == YT.PlayerState.ENDED) {
-        console.log("Video ended!");
-      }
-    }
-  </script>
-</body>
+<iframe 
+    src="https://www.youtube.com/embed/videoseries?list=PLQK67uyIvnwiFv_Gv5MwE9y5qXFAkVDwv" 
+    width="100%" 
+    height="100%" 
+    allow="autoplay; fullscreen" 
+    allowfullscreen
+    frameborder="0">
+  </iframe></body>
 </html>
