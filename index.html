@@ -24,6 +24,28 @@
   </style>
 </head>
 <body>
-  <iframe src="https://m.youtube.com/" allow="autoplay; fullscreen"></iframe>
+  <iframe id="youtube-iframe" src="https://m.youtube.com" allow="autoplay; fullscreen"></iframe>
+
+  <script>
+    // Access the iframe element
+    const iframe = document.getElementById('youtube-iframe');
+
+    // Function to handle clicks on links inside the iframe
+    iframe.onload = function() {
+      const iframeWindow = iframe.contentWindow;
+
+      // Try to modify link behavior inside the iframe (if possible)
+      iframeWindow.document.addEventListener('click', function(event) {
+        if (event.target.tagName === 'A') {
+          // Prevent link from opening in a new window or navigating away
+          event.preventDefault();
+          const link = event.target.href;
+          
+          // Load the link within the iframe
+          iframe.src = link;
+        }
+      });
+    };
+  </script>
 </body>
 </html>
