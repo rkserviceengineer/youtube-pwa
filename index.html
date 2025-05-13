@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YouTube Wrapper</title>
+<html>
+  <head>
+    <title>YouTube Player API Example</title>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+      var player;
 
-  <!-- PWA tags -->
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#000000" />
-  <link rel="apple-touch-icon" href="icon.png" />
+      // Create YouTube player after API is ready
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: 'l94vCs0vtbE', // Replace with your video ID
+          playerVars: {
+            autoplay: 1, // Automatically start the video
+            playlist: 'RDEMRwi1BHjXaQ9tkNb_FZ1X2w', // Your playlist ID
+          },
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange,
+          },
+        });
+      }
 
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-    iframe {
-      border: none;
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-</head>
-<body>
-<iframe 
-  src="https://www.youtube.com/embed/l94vCs0vtbE?list=RDEMRwi1BHjXaQ9tkNb_FZ1X2w&index=10&playnext=1" 
-  width="100%" 
-  height="100%" 
-  allow="autoplay; fullscreen" 
-  allowfullscreen 
-  frameborder="0">
-</iframe>
-</body>
+      // Function called when player is ready
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // Handle player state changes
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.ENDED) {
+          console.log('Video has finished playing!');
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h2>My YouTube Player</h2>
+    <div id="player"></div>
+  </body>
 </html>
